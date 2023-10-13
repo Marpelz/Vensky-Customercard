@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Metzgerei Vensky</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        #interactive.viewport {
+            position: relative;
+            width: 100%;
+        }
+        #scanner-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+<div id="scanner-container">
+    <div id="interactive" class="viewport"></div>
+    <div class="error"></div>
+</div>
+
+<script>
+    Quagga.init({
+        inputStream: {
+            name: "Live",
+            type: "LiveStream",
+            target: document.querySelector("#interactive"),
+        },
+        decoder: {
+            readers: ["ean_reader", "ean_8_reader", "code_128_reader"],
+        },
+    }, function(err) {
+        if (err) {
+            console.error(err);
+            alert("Kamerazugriff nicht möglich. Stellen Sie sicher, dass die Kamera zugelassen ist.");
+            return;
+        }
+        Quagga.start();
+
+        // Hier fügen Sie den Code für die Verarbeitung des gescannten QR-Codes hinzu
+        Quagga.onDetected(function(result) {
+            var code = result.codeResult.code;
+            fetch('/api/scan', {
+                method: 'POST',
+                body: JSON.stringify(code),
+                headers: { 'Content-Type': 'application/json' }
+            }).then(function(response) {
+                // Handle the response as needed
+            });
+        });
+    });
+</script>
+</body>
+</html>
