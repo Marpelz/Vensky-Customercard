@@ -13,38 +13,34 @@ public class ScannerService {
     @Autowired
     private CardRepository cardRepository;
 
-    public void processQRCode(String scannedQRCode) {
-        // Implementieren Sie hier die Logik für das Scannen des QR-Codes und die Datenbankverarbeitung.
-        // Annahme: Der gescannte QR-Code enthält die Karten-ID
+    public boolean validateQRCode(String scannedQRCode) {
+
         String cardId = extractCardId(scannedQRCode);
 
         if (cardId != null) {
-            // Überprüfen, ob die Karten-ID bereits in der Datenbank existiert
-            Optional<Card> existingCard = cardRepository.findByCardId(cardId);
+            Optional<CardModel> existingCard = cardRepository.findByCardId(cardId);
 
             if (existingCard.isPresent()) {
-                // Die Karten-ID existiert bereits in der Datenbank, aktualisieren Sie den Punktestand oder führen Sie andere Aktionen aus.
-                Card card = existingCard.get();
-                card.setPoints(card.getPoints() + 15); // Beispiel: Den Punktestand um 1 erhöhen
-                cardRepository.save(card); // Speichern Sie die aktualisierte Karte in der Datenbank
-            } else {
-                // Die Karten-ID existiert nicht in der Datenbank, erstellen Sie einen neuen Datensatz.
-                Card newCard = new Card();
-                newCard.setCardId(cardId);
-                newCard.setPoints(10); // Beispiel: Punktestand auf 1 setzen
-                cardRepository.save(newCard); // Speichern Sie die neue Karte in der Datenbank
+                CardModel cardModel = existingCard.get();
+                if ("ja".equals(cardModel.getStatus())) {
+                    // Überprüfe, ob der Status "ja" (aktiv) ist, bevor du weitere Aktionen ausführst
+                    cardModel.setPoints(cardModel.getPoints() + 15); // Beispiel: Den Punktestand um 15 erhöhen
+                    cardRepository.save(cardModel);
+                    return true; // QR-Code ist gültig und aktiviert
+                }
             }
         }
+        return false; // QR-Code ist ungültig oder inaktiv
     }
 
     // Annahme: Implementieren Sie die Methode zur Extraktion der Karten-ID aus dem QR-Code
     private String extractCardId(String scannedQRCode) {
-        // Implementieren Sie die Logik zur Extraktion der Karten-ID aus dem gescannten QR-Code
+
         // Geben Sie die Karten-ID zurück oder null, wenn sie nicht gefunden wird.
         // Dies kann je nach QR-Code-Format und Anforderungen variieren.
         try {
             // Suchen Sie nach einem 16-stelligen Muster in dem gescannten QR-Code.
-            Pattern pattern = Pattern.compile("[A-Za-z0-9!@#$%^&*()-_=+<>?]+");
+            Pattern pattern = Pattern.compile("[A-Za-z0-9]");
             Matcher matcher = pattern.matcher(scannedQRCode);
 
             if (matcher.find()) {
@@ -64,7 +60,7 @@ public class ScannerService {
         return null;
     }
 
-    public Card getCardByCardId(String cardId) {
+    public CardModel getCardByCardId(String cardId) {
         return cardRepository.findByCardId(cardId)
                 .orElse(null);
     }
