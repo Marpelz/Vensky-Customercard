@@ -1,41 +1,70 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Metzgerei Vensky</title>
     <style>
         body {
             text-align: center;
             font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #466f6d, #408F49); /* Grüner Verlauf von dunkel zu hell, jetzt umgedreht */
+        }
+
+        .content {
+            width: 100%;
             padding: 20px;
-        }
-        .container {
-            max-width: 100%;
-            margin: 0 auto;
-            background-color: #fff;
-            border-radius: 5px;
             box-shadow: 0px 0px 5px 0px #888;
+            border-radius: 5px;
+            background-color: #fff;
+            height: 100vh; /* Die volle Höhe des Bildschirms */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center; /* Horizontal und vertikal in der Mitte ausrichten */
+            background: linear-gradient(to bottom, #466f6d, #408F49); /* Grüner Verlauf von dunkel zu hell, jetzt umgedreht */
         }
-        h1 {
-            color: #f00;
+
+        .logo {
+            width: 660px;
+            height: auto;
+            margin-bottom: 20px; /* Abstand zwischen dem Logo und dem nächsten Element */
         }
+
         p {
             font-size: 18px;
+            margin-top: 10px;
+            line-height: 1.4;
         }
+
         .btn {
             display: inline-block;
-            padding: 10px 20px;
-            background-color: #f00;
-            color: #fff;
+            width: 150px; /* Festgelegte Breite des Buttons */
+            height: 40px; /* Festgelegte Höhe des Buttons */
+            background-color: #E88504;
+            color: #000000;
             text-decoration: none;
             border-radius: 5px;
+            margin-top: 15px;
+            line-height: 40px; /* Zentriert den Text vertikal im Button */
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #FCCA27;
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>Metzgerei Vensky</h1>
-    <p>Scannen Sie jetzt den QR-Code von Ihrer Kundenkarte, um diese zu aktivieren und Treuepunkte zu sammeln.</p>
+<div class="content">
+    <div class="logo-container">
+        <img src="logo-vensky.png" alt="Metzgerei Vensky Logo" class="logo">
+    </div>
+    <p>Scannen Sie jetzt den QR-Code von Ihrer Kundenkarte, <br>um diese zu aktivieren und Treuepunkte zu sammeln.</p>
     <a href="scanner.html" class="btn">QR-Code scannen</a>
 </div>
 </body>

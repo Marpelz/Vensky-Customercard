@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DdlMappings">
+    <mapping uuid="2c5710b6-095e-4c3a-a3f2-85879e955741" name="VenskyDB Mapping">
+      <data-sources db="dad9ef0c-a0b7-4ce6-8ecb-675c6ca1cb2d" ddl="4a67cdaa-d10d-4fd5-81c3-795390629942" />
+      <scope>
+        <node kind="database" qname="@" />
+      </scope>
+    </mapping>
+  </component>
+  <component name="SqlDataSourceStorage">
+    <option name="dataSources">
+      <list>
+        <State>
+          <option name="id" value="4a67cdaa-d10d-4fd5-81c3-795390629942" />
+          <option name="name" value="VenskyDB (DDL)" />
+          <option name="dbmsName" value="SQLITE" />
+          <option name="parent" value="dad9ef0c-a0b7-4ce6-8ecb-675c6ca1cb2d" />
+          <option name="urls">
+            <array>
+              <option value="file://$PROJECT_DIR$/metzgerei-vensky-kundenkarte" />
+            </array>
+          </option>
+          <option name="outLayout" value="File per object by schema.groovy" />
+        </State>
+      </list>
+    </option>
+  </component>
+</project>

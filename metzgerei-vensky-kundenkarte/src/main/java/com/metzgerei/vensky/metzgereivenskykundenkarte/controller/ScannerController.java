@@ -1,5 +1,7 @@
-package com.metzgerei.vensky.metzgereivenskykundenkarte;
+package com.metzgerei.vensky.metzgereivenskykundenkarte.controller;
 
+import com.metzgerei.vensky.metzgereivenskykundenkarte.models.CardModel;
+import com.metzgerei.vensky.metzgereivenskykundenkarte.services.ScannerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,9 +16,9 @@ public class ScannerController {
     private ScannerService scannerService;
 
     @PostMapping("/scan")
-    public ResponseEntity<String> scanQRCode(@RequestBody String scannedQRCodeContent) {
+    public ResponseEntity<String> scanQRCode(@RequestBody String scannedQRCode) {
         // Implementiere hier die Logik für das Scannen des QR-Codes und die Datenbanküberprüfung.
-        boolean isValidQRCode = scannerService.validateQRCode(scannedQRCodeContent);
+        boolean isValidQRCode = scannerService.validateQRCode(scannedQRCode);
 
         if (isValidQRCode) {
             // Der QR-Code ist gültig, du kannst hier weitere Aktionen ausführen, z.B. Punkte hinzufügen.
@@ -27,16 +29,16 @@ public class ScannerController {
         }
     }
 
-    @GetMapping("/points/{cardId}")
-    public String getPointsPage(@PathVariable String cardId, Model model) {
-        CardModel cardModel = scannerService.getCardByCardId(cardId);
+    @GetMapping("/points/{qrCode}")
+    public String getPointsPage(@PathVariable String qrCode, Model model) {
+        CardModel cardModel = scannerService.getCardByQrCode(qrCode);
 
         if (cardModel != null && "aktiv".equals(cardModel.getStatus())) {
             model.addAttribute("card", cardModel);
             return "points"; // Gibt die points.html-Vorlage zurück
         } else {
             // Wenn die Karte nicht gefunden oder inaktiv ist, leite zu einer Fehlerseite oder zeige eine Fehlermeldung an.
-            return "errorpage"; // Beispiel: Fehlerseite mit einer Nachricht "Ungültige Karte"
+            return "error-page"; // Beispiel: Fehlerseite mit einer Nachricht "Ungültige Karte"
         }
     }
 }

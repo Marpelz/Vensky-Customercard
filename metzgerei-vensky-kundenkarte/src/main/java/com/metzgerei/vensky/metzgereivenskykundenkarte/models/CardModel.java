@@ -1,25 +1,44 @@
-package com.metzgerei.vensky.metzgereivenskykundenkarte;
+package com.metzgerei.vensky.metzgereivenskykundenkarte.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "customer")
+@Table(name = "customercards")
 public class CardModel {
 
     @Id
-    private String cardId;
+    private Long cardId;
+    @Column(name = "qrCode")
+    private String qrCode;
+    @Column(name = "points")
     private int points;
+    @Column(name = "status")
     private String status;
 
+    public CardModel() {
+    }
 
-    public String getCardId() {
+    public CardModel(Long cardId, String qrCode, int points, String status) {
+        this.cardId = cardId;
+        this.qrCode = qrCode;
+        this.points = points;
+        this.status = status;
+    }
+
+    public Long getCardId() {
         return cardId;
     }
 
-    public void setCardId(String cardId) {
+    public void setCardId(Long cardId) {
         this.cardId = cardId;
+    }
+
+    public String getQrCode() {
+        return qrCode;
+    }
+
+    public void setQrCode(String qrCode) {
+        this.qrCode = qrCode;
     }
 
     public int getPoints() {
@@ -33,6 +52,7 @@ public class CardModel {
     public String getStatus() {
         return status;
     }
+
     public void setStatus(String status) {
         this.status = status;
     }

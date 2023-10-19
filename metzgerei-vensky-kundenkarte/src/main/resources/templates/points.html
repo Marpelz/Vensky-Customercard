@@ -1,9 +1,68 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="de">
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Metzgerei Vensky</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #466f6d, #408F49);
+
+        }
+
+        .content {
+            width: 100%;
+            padding: 20px;
+            box-shadow: 0 0 5px 0 #888;
+            border-radius: 5px;
+            background-color: #fff;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom, #466f6d, #408F49);
+
+
+        }
+
+        h2 span {
+            border: 3px solid #E88504; /* Dicke des Rahmens erhöht */
+            padding: 5px 70px; /* Größeres Padding für den Rahmen */
+            border-radius: 10px;
+            margin: 10px;
+        }
+
+
+
+
+        .logo {
+            width: 660px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+    </style>
 </head>
 <body>
-<h2>Ihr Punktestand: <span th:text="${card.points}"></span></h2>
+<div class="content">
+    <div class="logo-container">
+        <img src="logo-vensky.png" alt="Metzgerei Vensky Logo" class="logo">
+        <p>Vielen Dank für Ihre Treue!</p>
+        <br>
+        <h2>Ihr Punktestand:  <span th:text="${cardModel.points}"></span></h2>
+    </div>
+</div>
 </body>
 </html>

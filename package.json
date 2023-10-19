@@ -1,9 +1,13 @@
 {
   "dependencies": {
+    "@zxing/browser": "^0.1.4",
+    "@zxing/library": "^0.20.0",
     "core-js": "^3.33.0",
+    "html5-qrcode": "^2.3.8",
     "instascan": "^1.0.0",
     "latest": "^0.2.0",
     "npm": "^10.2.0",
+    "qr-scanner": "^1.4.2",
     "webrtc-adapter": "^8.2.3"
   }
 }
